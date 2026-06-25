@@ -5,11 +5,7 @@ const { getDb } = require('../src/database');
 const router = express.Router();
 
 /* ── POST /auth/register ── */
-<<<<<<< HEAD
-router.post('/register', async (req, res) => {
-=======
 router.post('/register', (req, res) => {
->>>>>>> 52b5c7148e1337320a44ed76f23d1e1f5eb2b2d6
   const { name, email, password } = req.body;
 
   if (!name || !email || !password) {
@@ -25,11 +21,7 @@ router.post('/register', (req, res) => {
     return res.status(409).json({ error: 'Email already registered.' });
   }
 
-<<<<<<< HEAD
-  const hash = await bcrypt.hash(password, 10);
-=======
   const hash = bcrypt.hashSync(password, 10);
->>>>>>> 52b5c7148e1337320a44ed76f23d1e1f5eb2b2d6
   const result = db.prepare(
     'INSERT INTO users (name, email, password) VALUES (?, ?, ?)'
   ).run(name.trim(), email.toLowerCase(), hash);
@@ -46,11 +38,7 @@ router.post('/register', (req, res) => {
 });
 
 /* ── POST /auth/login ── */
-<<<<<<< HEAD
-router.post('/login', async (req, res) => {
-=======
 router.post('/login', (req, res) => {
->>>>>>> 52b5c7148e1337320a44ed76f23d1e1f5eb2b2d6
   const { email, password } = req.body;
 
   if (!email || !password) {
@@ -59,12 +47,7 @@ router.post('/login', (req, res) => {
 
   const db = getDb();
   const user = db.prepare('SELECT * FROM users WHERE email = ?').get(email.toLowerCase());
-<<<<<<< HEAD
-  const valid = user && await bcrypt.compare(password, user.password);
-  if (!valid) {
-=======
   if (!user || !bcrypt.compareSync(password, user.password)) {
->>>>>>> 52b5c7148e1337320a44ed76f23d1e1f5eb2b2d6
     return res.status(401).json({ error: 'Incorrect email or password.' });
   }
 

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Taskly</title>
+  <link rel="icon" href="/assets/logo.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+
+  <!-- ── AUTH SCREEN ── -->
+  <div id="auth-screen" class="screen active">
+    <div class="auth-header">
+      <img class="auth-logo" src="/assets/logo.png" alt="Taskly logo" />
+      <p class="subtitle">Your calm productivity companion</p>
+    </div>
+    <div class="card">
+      <div class="auth-tabs">
+        <div class="auth-tab active" data-tab="login">Log in</div>
+        <div class="auth-tab"        data-tab="signup">Sign up</div>
+      </div>
+
+      <!-- Login form -->
+      <form id="login-form" novalidate>
+        <div class="field">
+          <label for="login-email">Email</label>
+          <input id="login-email" type="email" placeholder="you@email.com" autocomplete="email" required />
+        </div>
+        <div class="field">
+          <label for="login-pass">Password</label>
+          <input id="login-pass" type="password" placeholder="••••••••" autocomplete="current-password" required />
+        </div>
+        <p class="form-error" id="login-error"></p>
+        <button type="submit" class="btn-primary">Log in</button>
+      </form>
+
+      <!-- Signup form -->
+      <form id="signup-form" style="display:none" novalidate>
+        <div class="field">
+          <label for="su-name">Name</label>
+          <input id="su-name" type="text" placeholder="Your name" autocomplete="name" required />
+        </div>
+        <div class="field">
+          <label for="su-email">Email</label>
+          <input id="su-email" type="email" placeholder="you@email.com" autocomplete="email" required />
+        </div>
+        <div class="field">
+          <label for="su-pass">Password</label>
+          <input id="su-pass" type="password" placeholder="Min 6 chars" autocomplete="new-password" required />
+        </div>
+        <p class="form-error" id="signup-error"></p>
+        <button type="submit" class="btn-primary">Create account</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ── APP SCREEN ── -->
+  <div id="app-screen" class="screen">
+    <div class="app-wrapper">
+
+      <!-- Header -->
+      <div class="app-header">
+        <div>
+          <img class="header-logo" src="/assets/logo.png" alt="Taskly logo" />
+          <p class="subtitle" id="greeting">Hey there!</p>
+        </div>
+        <div class="user-badge">
+          <div class="avatar" id="user-avatar">?</div>
+          <button class="logout-btn" id="logout-btn">Log out</button>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-num" id="stat-total" style="color:var(--orange)">0</div>
+          <div class="stat-label">Total</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num" id="stat-done" style="color:var(--purple)">0</div>
+          <div class="stat-label">Done</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num" id="stat-left" style="color:var(--pink)">0</div>
+          <div class="stat-label">To do</div>
+        </div>
+      </div>
+
+      <!-- Task card -->
+      <div class="card">
+        <div class="add-bar">
+          <input id="new-task" type="text" placeholder="Add a new task..." autocomplete="off" />
+          <button id="open-add-btn">+ Add</button>
+        </div>
+        <div class="filters" id="filters">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="todo">To do</button>
+          <button class="filter-btn" data-filter="done">Done</button>
+          <button class="filter-btn" data-filter="high">High</button>
+          <button class="filter-btn" data-filter="mid">Mid</button>
+          <button class="filter-btn" data-filter="low">Low</button>
+        </div>
+        <div class="task-list" id="task-list"></div>
+      </div>
+
+      <!-- Modal -->
+      <div class="modal-overlay" id="modal-overlay">
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+          <h3 id="modal-title">Add task</h3>
+          <div class="field">
+            <label for="modal-task-name">Task name</label>
+            <input id="modal-task-name" type="text" placeholder="What needs to be done?" />
+          </div>
+          <div class="field">
+            <label for="modal-task-note">Note (optional)</label>
+            <input id="modal-task-note" type="text" placeholder="Extra details..." />
+          </div>
+          <div class="field">
+            <label>Priority</label>
+            <div class="priority-row">
+              <button type="button" class="p-btn" id="p-high" data-p="high">High</button>
+              <button type="button" class="p-btn" id="p-mid"  data-p="mid">Mid</button>
+              <button type="button" class="p-btn" id="p-low"  data-p="low">Low</button>
+            </div>
+          </div>
+          <div class="modal-actions">
+            <button type="button" class="btn-secondary" id="modal-cancel">Cancel</button>
+            <button type="button" class="btn-primary modal-save" id="modal-save">Save</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="/js/app.js"></script>
+</body>
+</html>
